@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+function getRandomNumber() {
+    return Math.floor(Math.random() * 101);
+}
+const randomNumber = getRandomNumber();
+---
+
+<Layout title="Word Game">
+	<main class="text-white flex flex-col items-center">
+		<h1 class="text-3xl text-green-600 p-4">Word Game</h1>
+        <h2>Prompt</h2>
+        <section class="flex flex-col gap-2">
+            <button class= text-green-400">Randomize</button>
+            <div class="bg-white p-4">
+                <input type="range" min="0" max="100" value=`${randomNumber}`/>
+            </div>
+            <button>Hide range</button>
+            <div>
+
+                <svg  width="92" height="92" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M8 12h-6" />
+                    <path d="M5 15l-3 -3l3 -3" />
+                    <path d="M22 12h-6" />
+                    <path d="M19 15l3 -3l-3 -3" />
+                    <path d="M12 4v16" />
+                </svg>
+            </div>
+        </section>
+
+	</main>
+</Layout>
+
+<style>
+    .uppercased {
+        text-transform: uppercase;
+    }
+    button {
+        width: 50px;
+        height: 50px;
+        background-color: #4a5568;
+        color: #f7fafc;
+        border: 1px solid #2d3748;
+        border-radius: 5px;
+        margin: 5px;
+    }
+
+</style>
