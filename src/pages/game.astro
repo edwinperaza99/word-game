@@ -5,46 +5,195 @@ function getRandomNumber() {
     return Math.floor(Math.random() * 101);
 }
 const randomNumber = getRandomNumber();
+
+const prompts = [""]
 ---
 
-<Layout title="Word Game">
-	<main class="text-white flex flex-col items-center">
-		<h1 class="text-3xl text-green-600 p-4">Word Game</h1>
-        <h2>Prompt</h2>
-        <section class="flex flex-col gap-2">
-            <button class= text-green-400">Randomize</button>
-            <div class="bg-white p-4">
-                <input type="range" min="0" max="100" value=`${randomNumber}`/>
-            </div>
-            <button>Hide range</button>
-            <div>
+<Layout title="Wavelength Clone">
+	<main class="text-white flex flex-col items-center gap-4 w-screen">
+        <div class="">
 
-                <svg  width="92" height="92" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M8 12h-6" />
-                    <path d="M5 15l-3 -3l3 -3" />
-                    <path d="M22 12h-6" />
-                    <path d="M19 15l3 -3l-3 -3" />
-                    <path d="M12 4v16" />
-                </svg>
-            </div>
-        </section>
-
+            <h1 class="text-6xl text-green-600 p-4">Wavelength Clone</h1>
+            <h2 class="text-3xl text-center py-2">Choose the likeliness</h2>
+            
+            <section class="flex flex-col gap-6 items-center min-w-full justify-center">
+                <div id="hide" class="border-2 border-green-500 p-4 min-w-full items-center justify-center">
+                    <input id="numberInput" type="range" min="0" max="100" value=`${randomNumber}` class="place-self-center sidy-range-input"/>
+                </div>
+                <button id="randomizeButton" class= "border-2 rounded-md border-green-400 text-green-400 p-4">Randomize</button>
+                <button id="hideButton" class="border-2 rounded-md border-green-400 text-green-400 p-4">Hide range</button>
+                <!-- <div class="flex items-center gap-6">
+                    <span>Boring</span>
+                    <svg class="stroke-green-500" width="92" height="92" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M8 12h-6" />
+                        <path d="M5 15l-3 -3l3 -3" />
+                        <path d="M22 12h-6" />
+                        <path d="M19 15l3 -3l-3 -3" />
+                        <path d="M12 4v16" />
+                    </svg>
+                    <span>Fun</span>
+                </div> -->
+                <h2 id="prompt">FALSE <---- ----> True</h2>
+                <h2 class="text-lg text-green-500">GUESS HERE</h2>
+                <div class="border-2 border-green-500 p-4 min-w-full">
+                    <input id="numberInput" type="range" min="0" max="100" value="0" class="w-full min-w-fill sidy-range-input"/>
+                </div>
+                <div class="flex gap-4">
+                    <button class="border-2 border-green-500 p-4 text-green-500">Submit</button>
+                </div>
+            </section>
+            
+        </div>
 	</main>
 </Layout>
+
+<script>
+const prompts = [
+    "Boring <-----> Fun",
+    "Cold <-----> Hot",
+    "Underrated <-----> Overrated",
+    "Weak <-----> Strong",
+    "Unpopular <-----> Popular",
+    "Cold <-----> Hot",
+    "Weird thing to own <-----> Cool thing to own",
+    "Requires luck <-----> Requires skill",
+    "Bad person <-----> Good person",
+    "Soft <-----> Hard",
+    "Normal pet <-----> Exotic pet",
+    "Useless body part <-----> Useful body part",
+    "Person you could beat up <-----> Person who'd beat you up",
+    "Culturally insignificant <-----> Culturally significant", 
+    "Bad pizza topping <-----> Good pizza topping",
+    "Useless major <-----> Useful major",
+    "Least evil company<-----> Most evil company",
+    "Worst living person <-----> Best living person",
+    "Unethical to eat <-----> Ethical to eat",
+    "Bad investment <-----> Good investment",
+    "Boring hobby <-----> Interesting hobby",
+    "Low Calorie <-----> High calorie",
+    "Cold<-----> Good habit"
+]
+
+document.addEventListener('DOMContentLoaded', () => {
+    const numberInput = document.querySelector('#numberInput');
+    const randomizeButton = document.querySelector('#randomizeButton');
+    const hide = document.querySelector('#hide');
+    const hideButton = document.querySelector('#hideButton');
+    const prompt = document.querySelector('#prompt');
+
+
+    if (numberInput instanceof HTMLInputElement && randomizeButton instanceof HTMLButtonElement && hideButton instanceof HTMLButtonElement && hide instanceof HTMLDivElement && prompt instanceof HTMLHeadingElement) {
+        randomizeButton.addEventListener('click', () => {
+            numberInput.value = Math.floor(Math.random() * 101).toString();
+            prompt.textContent = prompts[Math.floor(Math.random() * prompts.length)];
+            
+        });
+        hideButton.addEventListener('click', () => {
+            hide.classList.toggle('invisible');
+        });
+    } else {
+        console.error('One or more elements were not found or are of the wrong type.');
+    }
+});
+</script>
 
 <style>
     .uppercased {
         text-transform: uppercase;
     }
-    button {
-        width: 50px;
-        height: 50px;
-        background-color: #4a5568;
-        color: #f7fafc;
-        border: 1px solid #2d3748;
-        border-radius: 5px;
-        margin: 5px;
-    }
+    body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type=range].sidy-range-input {
+  -webkit-appearance: none;
+  width: 100%;
+  max-width: 320px;
+  margin: 4.4px 0;
+}
+input[type=range].sidy-range-input:focus {
+  outline: none;
+}
+input[type=range].sidy-range-input::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 7.2px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), 0px 0px 1px rgba(13, 13, 13, 0.6);
+  background: #29abe2;
+  border-radius: 5px;
+  border: 1px solid #010101;
+}
+input[type=range].sidy-range-input::-webkit-slider-thumb {
+  box-shadow: 1.5px 1.5px 1.1px #000000, 0px 0px 1.5px #0d0d0d;
+  border: 1px solid #000000;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5.4px;
+}
+input[type=range].sidy-range-input:focus::-webkit-slider-runnable-track {
+  background: #71c7ec;
+}
+input[type=range].sidy-range-input::-moz-range-track {
+  width: 100%;
+  height: 7.2px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), 0px 0px 1px rgba(13, 13, 13, 0.6);
+  background: #29abe2;
+  border-radius: 5px;
+  border: 1px solid #010101;
+}
+input[type=range].sidy-range-input::-moz-range-thumb {
+  box-shadow: 1.5px 1.5px 1.1px #000000, 0px 0px 1.5px #0d0d0d;
+  border: 1px solid #000000;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range].sidy-range-input::-ms-track {
+  width: 100%;
+  height: 7.2px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].sidy-range-input::-ms-fill-lower {
+  background: #1679a3;
+  border: 1px solid #010101;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), 0px 0px 1px rgba(13, 13, 13, 0.6);
+}
+input[type=range].sidy-range-input::-ms-fill-upper {
+  background: #29abe2;
+  border: 1px solid #010101;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), 0px 0px 1px rgba(13, 13, 13, 0.6);
+}
+input[type=range].sidy-range-input::-ms-thumb {
+  box-shadow: 1.5px 1.5px 1.1px #000000, 0px 0px 1.5px #0d0d0d;
+  border: 1px solid #000000;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  height: 7.2px;
+}
+input[type=range].sidy-range-input:focus::-ms-fill-lower {
+  background: #29abe2;
+}
+input[type=range].sidy-range-input:focus::-ms-fill-upper {
+  background: #71c7ec;
+}
 
 </style>
